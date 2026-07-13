@@ -19,6 +19,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      NEXT_TELEMETRY_DISABLED: 1
 
     steps:
       - name: Checkout
@@ -65,8 +67,36 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
+    outputs:
+      page_url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  verify:
+    runs-on: ubuntu-latest
+    needs: deploy
+    timeout-minutes: 5
+
+    steps:
+      - name: Verify published application
+        env:
+          PAGE_URL: ${{ needs.deploy.outputs.page_url }}
+        run: |
+          for attempt in {1..18}; do
+            html="$(curl --fail --silent --show-error --location \
+              "${PAGE_URL}?deployment=${GITHUB_SHA}")" || true
+
+            if grep --quiet '_next/static/' <<< "${html}"; then
+              echo "Verified Next.js application at ${PAGE_URL}"
+              exit 0
+            fi
+
+            echo "Deployment not active yet (attempt ${attempt}/18); retrying..."
+            sleep 10
+          done
+
+          echo "::error::GitHub Pages is not serving the deployed Next.js application."
+          exit 1
