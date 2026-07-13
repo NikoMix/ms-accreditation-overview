@@ -1,0 +1,114 @@
+site:
+  brand: "Microsoft Partner Acceleration"
+  eyebrow: "Specialization readiness"
+  title: "Turn specialization ambition into partner-ready delivery."
+  subtitle: "A single view of reusable accelerators and hands-on Microhacks for Microsoft Cloud and AI specializations."
+  microhackAccessNote: "Microhack repositories currently require authorized GitHub access."
+  footerNote: "Community-maintained partner enablement resources. Confirm current specialization requirements in Microsoft Partner Center before an audit."
+  repositoryUrl: "https://github.com/NikoMix/ms-accreditation-overview"
+  catalogUrl: "https://github.com/NikoMix/ms-accreditation-overview/blob/main/data/specializations.yaml"
+  frontierSourceUrl: "https://partner.microsoft.com/en-us/blog/article/engineering-frontier-partner-practice"
+  lastUpdated: "2026-07-13"
+
+solutionAreas:
+  - id: "cloud-ai-platform"
+    name: "Cloud & AI Platform"
+    description: "Build the secure cloud, data, developer, and AI foundations customers need to operate at scale."
+    icon: "cloud"
+    specializations:
+      - id: "infra-database-migration"
+        title: "Infra and Database Migration to Microsoft Azure"
+        readiness: "ready"
+        frontierEligible: false
+        accelerator: "https://github.com/NikoMix/specialization-infra-and-database-migration"
+        microhack: "https://github.com/NikoMix/microhack-infra-and-database-migration"
+
+      - id: "networking-services"
+        title: "Networking Services in Microsoft Azure"
+        readiness: "ready"
+        frontierEligible: false
+        accelerator: "https://github.com/NikoMix/specialization-networking-services"
+        microhack: "https://github.com/NikoMix/microhack-networking-services"
+
+      - id: "sap-on-azure"
+        title: "SAP on Microsoft Azure"
+        readiness: "ready"
+        frontierEligible: false
+        accelerator: "https://github.com/NikoMix/specialization-sap-on-azure"
+        microhack: "https://github.com/NikoMix/microhack-sap-on-azure"
+
+      - id: "azure-virtual-desktop"
+        title: "Microsoft Azure Virtual Desktop"
+        readiness: "in-progress"
+        frontierEligible: false
+        accelerator: "https://github.com/NikoMix/specialization-avd"
+        microhack: "https://github.com/NikoMix/microhack-avd"
+
+      - id: "hybrid-cloud-azure-local"
+        title: "Hybrid Cloud Infrastructure with Microsoft Azure Local"
+        readiness: "in-progress"
+        frontierEligible: false
+        accelerator: "https://github.com/NikoMix/specialization-hybrid-cloud-azure-hci"
+        microhack: "https://github.com/NikoMix/microhack-hybrid-claud-azure-hci"
+
+      - id: "ai-platform"
+        title: "AI Platform on Microsoft Azure"
+        readiness: "in-progress"
+        frontierEligible: true
+        frontierRequirement: "Counts toward the Microsoft Foundry requirement; AI Platform or AI Apps can satisfy this Frontier path."
+        accelerator: "https://github.com/NikoMix/specialization-ai-platform"
+        microhack: "https://github.com/NikoMix/microhack-ai-platform"
+
+      - id: "agentic-devops"
+        title: "Agentic DevOps with Microsoft Azure and GitHub"
+        readiness: "in-progress"
+        frontierEligible: false
+        accelerator: "https://github.com/NikoMix/specialization-agentic-devops"
+        microhack: "https://github.com/NikoMix/microhack-agentic-devops"
+
+      - id: "ai-apps"
+        title: "AI Apps on Microsoft Azure"
+        readiness: "in-progress"
+        frontierEligible: true
+        frontierRequirement: "Counts toward the Microsoft Foundry requirement; AI Apps or AI Platform can satisfy this Frontier path."
+        accelerator: "https://github.com/NikoMix/specialization-ai-apps"
+        microhack: "https://github.com/NikoMix/microhack-ai-apps"
+
+      - id: "kubernetes-on-azure"
+        title: "Kubernetes on Microsoft Azure"
+        readiness: "in-progress"
+        frontierEligible: false
+        accelerator: "https://github.com/NikoMix/specialization-kubernetes-on-azure"
+        microhack: "https://github.com/NikoMix/microhack-kubernetes-on-azure"
+
+      - id: "digital-data-sovereignty"
+        title: "Digital & Data Sovereignty"
+        readiness: "in-progress"
+        frontierEligible: false
+        accelerator: "https://github.com/NikoMix/specialization-digital-sovereignty"
+        microhack:
+
+      - id: "azure-vmware-solution"
+        title: "Microsoft Azure VMware Solution"
+        readiness: "in-progress"
+        frontierEligible: false
+        accelerator: "https://github.com/NikoMix/specialization-vmware"
+        microhack:
+
+  - id: "security"
+    name: "Security"
+    description: "Protect identities, data, infrastructure, applications, and AI with end-to-end security capabilities."
+    icon: "shield"
+    specializations: []
+
+  - id: "ai-business-solutions"
+    name: "AI Business Solutions"
+    description: "Transform business processes with AI, automation, low-code solutions, and intelligent applications."
+    icon: "sparkle"
+    specializations:
+      - id: "intelligent-automation"
+        title: "Intelligent Automation"
+        readiness: "in-progress"
+        frontierEligible: false
+        accelerator: "https://github.com/NikoMix/specialization-intelligent-automation"
+        microhack: "https://github.com/NikoMix/microhack-intelligent-automation"

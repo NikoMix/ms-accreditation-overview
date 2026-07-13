@@ -1,0 +1,18 @@
+# dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# tests and tooling
+coverage/
+playwright-report/
+test-results/
+*.tsbuildinfo
+
+# environment and local files
+.env*
+!.env.example
+.DS_Store
+Thumbs.db
