@@ -1,7 +1,6 @@
 import { CatalogView } from '@/components/CatalogView';
 import { Header } from '@/components/Header';
-import { Icon } from '@/components/Icon';
-import { getCatalog, type Readiness } from '@/lib/catalog';
+import { getCatalog, uniqueSpecializations, type Readiness } from '@/lib/catalog';
 
 const READINESS_LABELS: Record<Readiness, string> = {
   ready: 'Ready',
@@ -11,9 +10,7 @@ const READINESS_LABELS: Record<Readiness, string> = {
 
 export default function Home() {
   const { site, solutionAreas } = getCatalog();
-  const specializations = solutionAreas.flatMap(
-    (area) => area.specializations,
-  );
+  const specializations = uniqueSpecializations(solutionAreas);
   const readyCount = specializations.filter(
     (specialization) => specialization.readiness === 'ready',
   ).length;
@@ -40,27 +37,8 @@ export default function Home() {
           <div className="hero-orb hero-orb-two" aria-hidden="true" />
           <div className="shell hero-inner">
             <div className="hero-copy">
-              <span className="eyebrow">
-                <span className="eyebrow-dot" aria-hidden="true" />
-                {site.eyebrow}
-              </span>
               <h1>{site.title}</h1>
               <p>{site.subtitle}</p>
-              <div className="hero-actions">
-                <a className="button button-primary" href="#catalog">
-                  Explore the catalog
-                  <Icon name="arrow" />
-                </a>
-                <a
-                  className="button button-secondary"
-                  href={site.catalogUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Edit the YAML
-                  <Icon name="external" />
-                </a>
-              </div>
               <span className="updated-note">Updated {formattedDate}</span>
             </div>
 
@@ -78,18 +56,14 @@ export default function Home() {
               <div className="summary-card">
                 <span>Frontier eligible</span>
                 <strong>{frontierCount}</strong>
-                <small>Foundry-aligned options</small>
+                <small>Frontier prerequisites</small>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="readiness-legend" aria-labelledby="legend-title">
+        <section className="readiness-legend" aria-label="Readiness key">
           <div className="shell legend-inner">
-            <div>
-              <span className="section-kicker">At a glance</span>
-              <h2 id="legend-title">Readiness key</h2>
-            </div>
             <div className="legend-items">
               {(Object.keys(READINESS_LABELS) as Readiness[]).map(
                 (readiness) => (

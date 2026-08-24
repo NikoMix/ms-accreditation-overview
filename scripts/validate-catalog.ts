@@ -1,11 +1,12 @@
-import { getCatalog } from '../lib/catalog';
+import { getCatalog, uniqueSpecializations } from '../lib/catalog';
 
 const catalog = getCatalog();
-const specializationCount = catalog.solutionAreas.reduce(
+const entryCount = catalog.solutionAreas.reduce(
   (total, area) => total + area.specializations.length,
   0,
 );
+const specializationCount = uniqueSpecializations(catalog.solutionAreas).length;
 
 console.log(
-  `Catalog is valid: ${specializationCount} specializations across ${catalog.solutionAreas.length} solution areas.`,
+  `Catalog is valid: ${specializationCount} specializations (${entryCount} entries) across ${catalog.solutionAreas.length} solution areas.`,
 );

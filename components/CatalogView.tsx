@@ -39,6 +39,15 @@ const AREA_COLORS: Record<AreaIcon, { accent: string; soft: string }> = {
   sparkle: { accent: '#008272', soft: 'rgba(0, 130, 114, 0.1)' },
 };
 
+function countSpecializations(areas: SolutionArea[]) {
+  // A specialization can be listed under several solution areas, so count ids.
+  return new Set(
+    areas.flatMap((area) =>
+      area.specializations.map((specialization) => specialization.id),
+    ),
+  ).size;
+}
+
 function ReadinessIndicator({ readiness }: { readiness: Readiness }) {
   return (
     <span className={`readiness readiness-${readiness}`}>
@@ -231,14 +240,8 @@ export function CatalogView({
     }));
   }, [frontierOnly, query, readiness, solutionAreas]);
 
-  const resultCount = filteredAreas.reduce(
-    (total, area) => total + area.specializations.length,
-    0,
-  );
-  const totalCount = solutionAreas.reduce(
-    (total, area) => total + area.specializations.length,
-    0,
-  );
+  const resultCount = countSpecializations(filteredAreas);
+  const totalCount = countSpecializations(solutionAreas);
 
   function resetFilters() {
     setQuery('');
@@ -334,11 +337,11 @@ export function CatalogView({
           <div>
             <h2>About the Frontier eligibility badge</h2>
             <p>
-              It identifies catalog entries that can contribute to the
-              Microsoft Foundry specialization prerequisite for the Frontier
-              Partner specialization. AI Apps or AI Platform can satisfy that
-              path; current requirements remain subject to Microsoft program
-              guidance.
+              It marks the specializations that are prerequisites for the
+              Frontier Partner specialization: Microsoft 365 Copilot, Data
+              Security, and Identity and Access Management, plus either AI Apps
+              on Microsoft Azure or AI Platform on Microsoft Azure. Current
+              requirements remain subject to Microsoft program guidance.
             </p>
           </div>
           <a href={frontierSourceUrl} target="_blank" rel="noreferrer">
