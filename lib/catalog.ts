@@ -10,7 +10,6 @@ export type AreaIcon = (typeof AREA_ICON_VALUES)[number];
 
 export interface SiteMeta {
   brand: string;
-  eyebrow: string;
   title: string;
   subtitle: string;
   microhackAccessNote: string;
@@ -157,7 +156,6 @@ function parseSite(value: unknown): SiteMeta {
 
   return {
     brand: expectString(record, 'brand', 'site'),
-    eyebrow: expectString(record, 'eyebrow', 'site'),
     title: expectString(record, 'title', 'site'),
     subtitle: expectString(record, 'subtitle', 'site'),
     microhackAccessNote: expectString(record, 'microhackAccessNote', 'site'),
@@ -266,7 +264,7 @@ export function parseCatalog(value: unknown): Catalog {
   }
 
   const areaIds = new Set<string>();
-  const allSpecializationIds = new Set<string>();
+  const sharedSpecializations = new Map<string, string>();
   for (const area of solutionAreas) {
     if (areaIds.has(area.id)) {
       throw new Error(`Duplicate solution area id "${area.id}".`);
@@ -274,12 +272,16 @@ export function parseCatalog(value: unknown): Catalog {
     areaIds.add(area.id);
 
     for (const specialization of area.specializations) {
-      if (allSpecializationIds.has(specialization.id)) {
+      // A specialization may belong to several solution areas, but every copy
+      // has to describe the same readiness and resources.
+      const fingerprint = JSON.stringify(specialization);
+      const previous = sharedSpecializations.get(specialization.id);
+      if (previous !== undefined && previous !== fingerprint) {
         throw new Error(
-          `Duplicate specialization id "${specialization.id}" across solution areas.`,
+          `Specialization "${specialization.id}" must use identical values in every solution area.`,
         );
       }
-      allSpecializationIds.add(specialization.id);
+      sharedSpecializations.set(specialization.id, fingerprint);
     }
   }
 
@@ -293,4 +295,23 @@ export function getCatalog(): Catalog {
   const filePath = join(process.cwd(), 'data', 'specializations.yaml');
   const source = readFileSync(filePath, 'utf8');
   return parseCatalog(load(source));
+}
+
+/**
+ * Flattens the catalog to one entry per specialization, because a
+ * specialization can be listed under more than one solution area.
+ */
+export function uniqueSpecializations(
+  solutionAreas: SolutionArea[],
+): Specialization[] {
+  const seen = new Map<string, Specialization>();
+  for (const area of solutionAreas) {
+    for (const specialization of area.specializations) {
+      if (!seen.has(specialization.id)) {
+        seen.set(specialization.id, specialization);
+      }
+    }
+  }
+
+  return [...seen.values()];
 }

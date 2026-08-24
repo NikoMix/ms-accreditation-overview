@@ -29,7 +29,7 @@ catalog updates.
 ```yaml
 solutionAreas:
   - id: "cloud-ai-platform"
-    name: "Cloud & AI Platform"
+    name: "Cloud & AI Platforms"
     description: "Short description shown above the table."
     icon: "cloud"
     specializations:
@@ -41,6 +41,16 @@ solutionAreas:
         accelerator: "https://github.com/owner/accelerator"
         microhack: "https://github.com/owner/microhack"
 ```
+
+Solution areas and their specializations mirror the tabs on the
+[Microsoft specialization page](https://partner.microsoft.com/en-us/partnership/specialization),
+including every solution path behind each tab.
+
+### Shared specializations
+
+Microsoft lists some specializations under more than one solution area. Repeat
+the entry in each area it belongs to, using the same `id` and identical values
+throughout. The build fails when two copies of the same `id` disagree.
 
 ### Readiness values
 
@@ -61,9 +71,10 @@ called out in the catalog UI.
 
 Set `frontierEligible: true` only when the specialization counts toward a
 published Frontier Partner specialization prerequisite. Add
-`frontierRequirement` to explain the path. The current catalog marks **AI Apps
-on Microsoft Azure** and **AI Platform on Microsoft Azure** as the alternative
-Microsoft Foundry options.
+`frontierRequirement` to explain the path. The current catalog marks
+**Microsoft 365 Copilot**, **Data Security**, and **Identity and Access
+Management**, plus **AI Apps on Microsoft Azure** and **AI Platform on
+Microsoft Azure** as the two alternatives for the fourth prerequisite.
 
 Frontier program criteria are evolving. Confirm changes against
 [Microsoft guidance](https://partner.microsoft.com/en-us/blog/article/engineering-frontier-partner-practice)

@@ -1,6 +1,5 @@
 site:
   brand: "Microsoft Partner Acceleration"
-  eyebrow: "Specialization readiness"
   title: "Turn specialization ambition into partner-ready delivery."
   subtitle: "A single view of reusable accelerators and hands-on Microhacks for Microsoft Cloud and AI specializations."
   microhackAccessNote: "Microhack repositories currently require authorized GitHub access."
@@ -8,11 +7,15 @@ site:
   repositoryUrl: "https://github.com/NikoMix/ms-accreditation-overview"
   catalogUrl: "https://github.com/NikoMix/ms-accreditation-overview/blob/main/data/specializations.yaml"
   frontierSourceUrl: "https://partner.microsoft.com/en-us/blog/article/engineering-frontier-partner-practice"
-  lastUpdated: "2026-07-13"
+  lastUpdated: "2026-08-24"
 
+# Specializations mirror the solution areas published on
+# https://partner.microsoft.com/en-us/partnership/specialization
+# A specialization listed under more than one solution area repeats the same
+# id, title, readiness, and resource links in every area it belongs to.
 solutionAreas:
   - id: "cloud-ai-platform"
-    name: "Cloud & AI Platform"
+    name: "Cloud & AI Platforms"
     description: "Build the secure cloud, data, developer, and AI foundations customers need to operate at scale."
     icon: "cloud"
     specializations:
@@ -37,28 +40,6 @@ solutionAreas:
         accelerator: "https://github.com/NikoMix/specialization-sap-on-azure"
         microhack: "https://github.com/NikoMix/microhack-sap-on-azure"
 
-      - id: "azure-virtual-desktop"
-        title: "Microsoft Azure Virtual Desktop"
-        readiness: "in-progress"
-        frontierEligible: false
-        accelerator: "https://github.com/NikoMix/specialization-avd"
-        microhack: "https://github.com/NikoMix/microhack-avd"
-
-      - id: "hybrid-cloud-azure-local"
-        title: "Hybrid Cloud Infrastructure with Microsoft Azure Local"
-        readiness: "in-progress"
-        frontierEligible: false
-        accelerator: "https://github.com/NikoMix/specialization-hybrid-cloud-azure-hci"
-        microhack: "https://github.com/NikoMix/microhack-hybrid-claud-azure-hci"
-
-      - id: "ai-platform"
-        title: "AI Platform on Microsoft Azure"
-        readiness: "in-progress"
-        frontierEligible: true
-        frontierRequirement: "Counts toward the Microsoft Foundry requirement; AI Platform or AI Apps can satisfy this Frontier path."
-        accelerator: "https://github.com/NikoMix/specialization-ai-platform"
-        microhack: "https://github.com/NikoMix/microhack-ai-platform"
-
       - id: "agentic-devops"
         title: "Agentic DevOps with Microsoft Azure and GitHub"
         readiness: "in-progress"
@@ -70,9 +51,52 @@ solutionAreas:
         title: "AI Apps on Microsoft Azure"
         readiness: "in-progress"
         frontierEligible: true
-        frontierRequirement: "Counts toward the Microsoft Foundry requirement; AI Apps or AI Platform can satisfy this Frontier path."
+        frontierRequirement: "Counts toward the Frontier Partner prerequisite; AI Apps or AI Platform can satisfy this path."
         accelerator: "https://github.com/NikoMix/specialization-ai-apps"
         microhack: "https://github.com/NikoMix/microhack-ai-apps"
+
+      - id: "ai-platform"
+        title: "AI Platform on Microsoft Azure"
+        readiness: "in-progress"
+        frontierEligible: true
+        frontierRequirement: "Counts toward the Frontier Partner prerequisite; AI Platform or AI Apps can satisfy this path."
+        accelerator: "https://github.com/NikoMix/specialization-ai-platform"
+        microhack: "https://github.com/NikoMix/microhack-ai-platform"
+
+      - id: "azure-virtual-desktop"
+        title: "Microsoft Azure Virtual Desktop"
+        readiness: "in-progress"
+        frontierEligible: false
+        accelerator: "https://github.com/NikoMix/specialization-avd"
+        microhack: "https://github.com/NikoMix/microhack-avd"
+
+      - id: "azure-vmware-solution"
+        title: "Microsoft Azure VMware Solution"
+        readiness: "in-progress"
+        frontierEligible: false
+        accelerator: "https://github.com/NikoMix/specialization-vmware"
+        microhack: null
+
+      - id: "digital-data-sovereignty"
+        title: "Digital & Data Sovereignty"
+        readiness: "in-progress"
+        frontierEligible: false
+        accelerator: "https://github.com/NikoMix/specialization-digital-sovereignty"
+        microhack: null
+
+      - id: "hybrid-cloud-azure-local"
+        title: "Hybrid Cloud Infrastructure with Microsoft Azure Local"
+        readiness: "in-progress"
+        frontierEligible: false
+        accelerator: "https://github.com/NikoMix/specialization-hybrid-cloud-azure-hci"
+        microhack: "https://github.com/NikoMix/microhack-hybrid-claud-azure-hci"
+
+      - id: "intelligent-automation"
+        title: "Intelligent Automation"
+        readiness: "in-progress"
+        frontierEligible: false
+        accelerator: "https://github.com/NikoMix/specialization-intelligent-automation"
+        microhack: "https://github.com/NikoMix/microhack-intelligent-automation"
 
       - id: "kubernetes-on-azure"
         title: "Kubernetes on Microsoft Azure"
@@ -81,34 +105,226 @@ solutionAreas:
         accelerator: "https://github.com/NikoMix/specialization-kubernetes-on-azure"
         microhack: "https://github.com/NikoMix/microhack-kubernetes-on-azure"
 
-      - id: "digital-data-sovereignty"
-        title: "Digital & Data Sovereignty"
-        readiness: "in-progress"
+      - id: "agentic-business-solutions"
+        title: "Agentic Business Solutions"
+        readiness: "planned"
         frontierEligible: false
-        accelerator: "https://github.com/NikoMix/specialization-digital-sovereignty"
-        microhack:
+        accelerator: null
+        microhack: null
 
-      - id: "azure-vmware-solution"
-        title: "Microsoft Azure VMware Solution"
-        readiness: "in-progress"
+      - id: "analytics-on-azure"
+        title: "Analytics on Azure"
+        readiness: "planned"
         frontierEligible: false
-        accelerator: "https://github.com/NikoMix/specialization-vmware"
-        microhack:
+        accelerator: null
+        microhack: null
+
+      - id: "app-modernization-on-azure"
+        title: "App Modernization on Microsoft Azure"
+        readiness: "planned"
+        frontierEligible: false
+        accelerator: null
+        microhack: null
+
+      - id: "business-intelligence"
+        title: "Business Intelligence"
+        readiness: "planned"
+        frontierEligible: false
+        accelerator: null
+        microhack: null
+
+      - id: "data-warehouse-migration"
+        title: "Data Warehouse Migration to Microsoft Azure"
+        readiness: "planned"
+        frontierEligible: false
+        accelerator: null
+        microhack: null
+
+      - id: "low-code-application-development"
+        title: "Low Code Application Development"
+        readiness: "planned"
+        frontierEligible: false
+        accelerator: null
+        microhack: null
+
+      - id: "migrate-enterprise-applications"
+        title: "Migrate Enterprise Applications to Microsoft Azure"
+        readiness: "planned"
+        frontierEligible: false
+        accelerator: null
+        microhack: null
 
   - id: "security"
     name: "Security"
     description: "Protect identities, data, infrastructure, applications, and AI with end-to-end security capabilities."
     icon: "shield"
-    specializations: []
+    specializations:
+      - id: "digital-data-sovereignty"
+        title: "Digital & Data Sovereignty"
+        readiness: "in-progress"
+        frontierEligible: false
+        accelerator: "https://github.com/NikoMix/specialization-digital-sovereignty"
+        microhack: null
+
+      - id: "cloud-security"
+        title: "Cloud Security"
+        readiness: "planned"
+        frontierEligible: false
+        accelerator: null
+        microhack: null
+
+      - id: "data-security"
+        title: "Data Security"
+        readiness: "planned"
+        frontierEligible: true
+        frontierRequirement: "Required for the Frontier Partner specialization; partners must hold all four prerequisite specializations."
+        accelerator: null
+        microhack: null
+
+      - id: "identity-access-management"
+        title: "Identity and Access Management"
+        readiness: "planned"
+        frontierEligible: true
+        frontierRequirement: "Required for the Frontier Partner specialization; partners must hold all four prerequisite specializations."
+        accelerator: null
+        microhack: null
+
+      - id: "microsoft-365-copilot"
+        title: "Microsoft 365 Copilot"
+        readiness: "planned"
+        frontierEligible: true
+        frontierRequirement: "Required for the Frontier Partner specialization; partners must hold all four prerequisite specializations."
+        accelerator: null
+        microhack: null
+
+      - id: "threat-protection"
+        title: "Threat Protection"
+        readiness: "planned"
+        frontierEligible: false
+        accelerator: null
+        microhack: null
 
   - id: "ai-business-solutions"
     name: "AI Business Solutions"
     description: "Transform business processes with AI, automation, low-code solutions, and intelligent applications."
     icon: "sparkle"
     specializations:
+      - id: "digital-data-sovereignty"
+        title: "Digital & Data Sovereignty"
+        readiness: "in-progress"
+        frontierEligible: false
+        accelerator: "https://github.com/NikoMix/specialization-digital-sovereignty"
+        microhack: null
+
       - id: "intelligent-automation"
         title: "Intelligent Automation"
         readiness: "in-progress"
         frontierEligible: false
         accelerator: "https://github.com/NikoMix/specialization-intelligent-automation"
         microhack: "https://github.com/NikoMix/microhack-intelligent-automation"
+
+      - id: "adoption-change-management"
+        title: "Adoption and Change Management"
+        readiness: "planned"
+        frontierEligible: false
+        accelerator: null
+        microhack: null
+
+      - id: "agentic-business-solutions"
+        title: "Agentic Business Solutions"
+        readiness: "planned"
+        frontierEligible: false
+        accelerator: null
+        microhack: null
+
+      - id: "business-intelligence"
+        title: "Business Intelligence"
+        readiness: "planned"
+        frontierEligible: false
+        accelerator: null
+        microhack: null
+
+      - id: "calling-for-teams"
+        title: "Calling for Microsoft Teams"
+        readiness: "planned"
+        frontierEligible: false
+        accelerator: null
+        microhack: null
+
+      - id: "custom-solutions-for-teams"
+        title: "Custom Solutions for Microsoft Teams"
+        readiness: "planned"
+        frontierEligible: false
+        accelerator: null
+        microhack: null
+
+      - id: "finance"
+        title: "Finance"
+        readiness: "planned"
+        frontierEligible: false
+        accelerator: null
+        microhack: null
+
+      - id: "low-code-application-development"
+        title: "Low Code Application Development"
+        readiness: "planned"
+        frontierEligible: false
+        accelerator: null
+        microhack: null
+
+      - id: "meetings-and-meeting-rooms-for-teams"
+        title: "Meetings and Meeting Rooms for Microsoft Teams"
+        readiness: "planned"
+        frontierEligible: false
+        accelerator: null
+        microhack: null
+
+      - id: "microsoft-365-copilot"
+        title: "Microsoft 365 Copilot"
+        readiness: "planned"
+        frontierEligible: true
+        frontierRequirement: "Required for the Frontier Partner specialization; partners must hold all four prerequisite specializations."
+        accelerator: null
+        microhack: null
+
+      - id: "modernize-endpoints"
+        title: "Modernize Endpoints"
+        readiness: "planned"
+        frontierEligible: false
+        accelerator: null
+        microhack: null
+
+      - id: "sales"
+        title: "Sales"
+        readiness: "planned"
+        frontierEligible: false
+        accelerator: null
+        microhack: null
+
+      - id: "secure-ai-productivity"
+        title: "Secure AI Productivity"
+        readiness: "planned"
+        frontierEligible: false
+        accelerator: null
+        microhack: null
+
+      - id: "service"
+        title: "Service"
+        readiness: "planned"
+        frontierEligible: false
+        accelerator: null
+        microhack: null
+
+      - id: "small-midsize-business-management"
+        title: "Small and Midsize Business Management"
+        readiness: "planned"
+        frontierEligible: false
+        accelerator: null
+        microhack: null
+
+      - id: "supply-chain"
+        title: "Supply Chain"
+        readiness: "planned"
+        frontierEligible: false
+        accelerator: null
+        microhack: null
