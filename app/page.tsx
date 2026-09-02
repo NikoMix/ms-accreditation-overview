@@ -9,8 +9,13 @@ const READINESS_LABELS: Record<Readiness, string> = {
 };
 
 export default function Home() {
-  const { site, solutionAreas } = getCatalog();
-  const specializations = uniqueSpecializations(solutionAreas);
+  const { site, solutionAreas, frontierSpecialization } = getCatalog();
+  // The Frontier specialization spans every area, so it is counted once here
+  // instead of inside a solution area.
+  const specializations = [
+    frontierSpecialization,
+    ...uniqueSpecializations(solutionAreas),
+  ];
   const readyCount = specializations.filter(
     (specialization) => specialization.readiness === 'ready',
   ).length;
@@ -91,6 +96,7 @@ export default function Home() {
 
         <CatalogView
           solutionAreas={solutionAreas}
+          frontierSpecialization={frontierSpecialization}
           frontierSourceUrl={site.frontierSourceUrl}
           microhackAccessNote={site.microhackAccessNote}
         />

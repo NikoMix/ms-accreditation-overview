@@ -30,6 +30,15 @@ export interface Specialization {
   microhack: string | null;
 }
 
+/**
+ * The Frontier Partner specialization spans every solution area, so it is kept
+ * outside the area lists and rendered above them.
+ */
+export interface FrontierSpecialization extends Specialization {
+  status: string;
+  summary: string;
+}
+
 export interface SolutionArea {
   id: string;
   name: string;
@@ -40,6 +49,7 @@ export interface SolutionArea {
 
 export interface Catalog {
   site: SiteMeta;
+  frontierSpecialization: FrontierSpecialization;
   solutionAreas: SolutionArea[];
 }
 
@@ -167,8 +177,7 @@ function parseSite(value: unknown): SiteMeta {
   };
 }
 
-function parseSpecialization(value: unknown, path: string): Specialization {
-  const record = expectRecord(value, path);
+function parseReadiness(record: UnknownRecord, path: string): Readiness {
   const readinessValue = expectString(record, 'readiness', path);
   if (!READINESS_VALUES.some((value) => value === readinessValue)) {
     throw new Error(
@@ -176,15 +185,16 @@ function parseSpecialization(value: unknown, path: string): Specialization {
     );
   }
 
-  const readiness = readinessValue as Readiness;
+  return readinessValue as Readiness;
+}
+
+function parseResources(
+  record: UnknownRecord,
+  path: string,
+  readiness: Readiness,
+): { accelerator: string | null; microhack: string | null } {
   const accelerator = expectUrl(record, 'accelerator', path, true);
   const microhack = expectUrl(record, 'microhack', path, true);
-  const frontierEligible = expectBoolean(record, 'frontierEligible', path);
-  const frontierRequirement = expectOptionalString(
-    record,
-    'frontierRequirement',
-    path,
-  );
 
   if (readiness === 'ready' && (!accelerator || !microhack)) {
     throw new Error(
@@ -195,6 +205,20 @@ function parseSpecialization(value: unknown, path: string): Specialization {
   if (readiness !== 'planned' && !accelerator) {
     throw new Error(`${path} must publish an accelerator before work starts.`);
   }
+
+  return { accelerator, microhack };
+}
+
+function parseSpecialization(value: unknown, path: string): Specialization {
+  const record = expectRecord(value, path);
+  const readiness = parseReadiness(record, path);
+  const { accelerator, microhack } = parseResources(record, path, readiness);
+  const frontierEligible = expectBoolean(record, 'frontierEligible', path);
+  const frontierRequirement = expectOptionalString(
+    record,
+    'frontierRequirement',
+    path,
+  );
 
   if (frontierEligible && !frontierRequirement) {
     throw new Error(
@@ -208,6 +232,27 @@ function parseSpecialization(value: unknown, path: string): Specialization {
     readiness,
     frontierEligible,
     frontierRequirement,
+    accelerator,
+    microhack,
+  };
+}
+
+function parseFrontierSpecialization(value: unknown): FrontierSpecialization {
+  const path = 'frontierSpecialization';
+  const record = expectRecord(value, path);
+  const readiness = parseReadiness(record, path);
+  const { accelerator, microhack } = parseResources(record, path, readiness);
+
+  return {
+    id: expectSlug(record, 'id', path),
+    title: expectString(record, 'title', path),
+    status: expectString(record, 'status', path),
+    summary: expectString(record, 'summary', path),
+    readiness,
+    // The entry is the Frontier specialization itself, not a prerequisite for
+    // it, so it never carries the "Frontier eligible" badge.
+    frontierEligible: false,
+    frontierRequirement: null,
     accelerator,
     microhack,
   };
@@ -263,6 +308,10 @@ export function parseCatalog(value: unknown): Catalog {
     throw new Error('At least one solution area is required.');
   }
 
+  const frontierSpecialization = parseFrontierSpecialization(
+    root.frontierSpecialization,
+  );
+
   const areaIds = new Set<string>();
   const sharedSpecializations = new Map<string, string>();
   for (const area of solutionAreas) {
@@ -272,6 +321,12 @@ export function parseCatalog(value: unknown): Catalog {
     areaIds.add(area.id);
 
     for (const specialization of area.specializations) {
+      if (specialization.id === frontierSpecialization.id) {
+        throw new Error(
+          `Specialization "${specialization.id}" is cross-solution area and must not be listed inside "${area.id}".`,
+        );
+      }
+
       // A specialization may belong to several solution areas, but every copy
       // has to describe the same readiness and resources.
       const fingerprint = JSON.stringify(specialization);
@@ -287,6 +342,7 @@ export function parseCatalog(value: unknown): Catalog {
 
   return {
     site: parseSite(root.site),
+    frontierSpecialization,
     solutionAreas,
   };
 }

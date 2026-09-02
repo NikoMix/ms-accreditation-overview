@@ -52,6 +52,28 @@ Microsoft lists some specializations under more than one solution area. Repeat
 the entry in each area it belongs to, using the same `id` and identical values
 throughout. The build fails when two copies of the same `id` disagree.
 
+### Cross-solution area specialization
+
+The Microsoft Frontier Partner specialization spans every solution area and
+carries its own audit, so it is maintained in a top-level `frontierSpecialization`
+block instead of inside `solutionAreas`, and renders as a highlighted panel above
+the area tables. The build rejects the same id inside a solution area.
+
+```yaml
+frontierSpecialization:
+  id: "frontier-partner"
+  title: "Microsoft Frontier Partner Specialization"
+  status: "Announced by Microsoft; not yet released"
+  summary: "Shown under the title."
+  readiness: "planned"
+  accelerator: null
+  microhack: null
+```
+
+It never shows the "Frontier eligible" badge, because it is the destination of
+the Frontier path rather than a prerequisite for it, and it stays in view when
+the "Frontier eligible only" filter is on.
+
 ### Readiness values
 
 | Value | Indicator | Use when |

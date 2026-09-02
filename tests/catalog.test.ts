@@ -13,7 +13,6 @@ test('loads the maintained catalog', () => {
   assert.equal(entryCount, 42);
   assert.equal(uniqueSpecializations(catalog.solutionAreas).length, 35);
 });
-
 test('mirrors the published solution area sizes', () => {
   const sizes = Object.fromEntries(
     getCatalog().solutionAreas.map((area) => [
@@ -45,6 +44,42 @@ test('requires identical values for a shared specialization', () => {
   assert.throws(
     () => parseCatalog(catalog),
     /must use identical values in every solution area/,
+  );
+});
+
+test('publishes the cross-solution area Frontier specialization', () => {
+  const catalog = getCatalog();
+  const { frontierSpecialization, solutionAreas } = catalog;
+
+  assert.equal(
+    frontierSpecialization.title,
+    'Microsoft Frontier Partner Specialization',
+  );
+  assert.equal(frontierSpecialization.readiness, 'planned');
+  assert.equal(frontierSpecialization.accelerator, null);
+  assert.equal(frontierSpecialization.microhack, null);
+  // It is the Frontier destination, not a prerequisite, so it carries no badge.
+  assert.equal(frontierSpecialization.frontierEligible, false);
+  assert.ok(frontierSpecialization.status.length > 0);
+  assert.ok(frontierSpecialization.summary.length > 0);
+
+  const listedInsideAnArea = solutionAreas
+    .flatMap((area) => area.specializations)
+    .some(
+      (specialization) => specialization.id === frontierSpecialization.id,
+    );
+  assert.equal(listedInsideAnArea, false);
+});
+
+test('rejects the Frontier specialization inside a solution area', () => {
+  const catalog = structuredClone(getCatalog());
+  catalog.solutionAreas[0].specializations.push({
+    ...catalog.frontierSpecialization,
+  });
+
+  assert.throws(
+    () => parseCatalog(catalog),
+    /is cross-solution area and must not be listed inside/,
   );
 });
 

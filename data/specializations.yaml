@@ -9,6 +9,17 @@ site:
   frontierSourceUrl: "https://partner.microsoft.com/en-us/blog/article/engineering-frontier-partner-practice"
   lastUpdated: "2026-08-24"
 
+# The Frontier Partner specialization spans every solution area and carries its
+# own audit, so it is maintained separately and rendered above the area tables.
+frontierSpecialization:
+  id: "frontier-partner"
+  title: "Microsoft Frontier Partner Specialization"
+  status: "Announced by Microsoft; not yet released"
+  summary: "The only cross-solution area specialization. It requires prerequisite specializations across the Microsoft Cloud domains, a minimum number of Frontier Transformation Engineer badge holders, Microsoft Fabric data engineering depth, and a separate agentic capability audit."
+  readiness: "planned"
+  accelerator: null
+  microhack: null
+
 # Specializations mirror the solution areas published on
 # https://partner.microsoft.com/en-us/partnership/specialization
 # A specialization listed under more than one solution area repeats the same

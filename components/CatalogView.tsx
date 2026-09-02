@@ -3,6 +3,7 @@
 import { useMemo, useState, type CSSProperties } from 'react';
 import type {
   AreaIcon,
+  FrontierSpecialization,
   Readiness,
   SolutionArea,
   Specialization,
@@ -82,6 +83,64 @@ function ResourceLink({
       <span>{label}</span>
       <Icon name="external" className="external-icon" />
     </a>
+  );
+}
+
+function FrontierHighlight({
+  specialization,
+}: {
+  specialization: FrontierSpecialization;
+}) {
+  return (
+    <section
+      className="frontier-highlight"
+      id={specialization.id}
+      aria-labelledby="frontier-highlight-title"
+    >
+      <div className="frontier-highlight-heading">
+        <span className="frontier-highlight-icon" aria-hidden="true">
+          <Icon name="frontier" />
+        </span>
+        <div className="frontier-highlight-title">
+          <span className="frontier-highlight-kicker">
+            Cross-solution area specialization
+          </span>
+          <h2 id="frontier-highlight-title">{specialization.title}</h2>
+        </div>
+        <span className="frontier-status">{specialization.status}</span>
+      </div>
+
+      <p>{specialization.summary}</p>
+
+      <dl className="frontier-highlight-facts">
+        <div>
+          <dt>Readiness</dt>
+          <dd>
+            <ReadinessIndicator readiness={specialization.readiness} />
+          </dd>
+        </div>
+        <div>
+          <dt>Accelerator</dt>
+          <dd>
+            <ResourceLink
+              href={specialization.accelerator}
+              label="Open accelerator"
+              specialization={specialization.title}
+            />
+          </dd>
+        </div>
+        <div>
+          <dt>Microhack</dt>
+          <dd>
+            <ResourceLink
+              href={specialization.microhack}
+              label="Open Microhack"
+              specialization={specialization.title}
+            />
+          </dd>
+        </div>
+      </dl>
+    </section>
   );
 }
 
@@ -208,10 +267,12 @@ function AreaSection({
 
 export function CatalogView({
   solutionAreas,
+  frontierSpecialization,
   frontierSourceUrl,
   microhackAccessNote,
 }: {
   solutionAreas: SolutionArea[];
+  frontierSpecialization: FrontierSpecialization;
   frontierSourceUrl: string;
   microhackAccessNote: string;
 }) {
@@ -240,8 +301,18 @@ export function CatalogView({
     }));
   }, [frontierOnly, query, readiness, solutionAreas]);
 
-  const resultCount = countSpecializations(filteredAreas);
-  const totalCount = countSpecializations(solutionAreas);
+  const normalizedQuery = query.trim().toLocaleLowerCase();
+  // The Frontier specialization is the destination of the Frontier path, so the
+  // "Frontier eligible only" toggle always keeps it in view.
+  const frontierVisible =
+    (normalizedQuery === '' ||
+      frontierSpecialization.title
+        .toLocaleLowerCase()
+        .includes(normalizedQuery)) &&
+    (readiness === 'all' || frontierSpecialization.readiness === readiness);
+
+  const resultCount = countSpecializations(filteredAreas) + (frontierVisible ? 1 : 0);
+  const totalCount = countSpecializations(solutionAreas) + 1;
 
   function resetFilters() {
     setQuery('');
@@ -320,6 +391,9 @@ export function CatalogView({
         </section>
 
         <div className="area-list">
+          {frontierVisible ? (
+            <FrontierHighlight specialization={frontierSpecialization} />
+          ) : null}
           {filteredAreas.map((area, index) => (
             <AreaSection
               key={area.id}
