@@ -16,7 +16,6 @@ export interface SiteMeta {
   footerNote: string;
   repositoryUrl: string;
   catalogUrl: string;
-  frontierSourceUrl: string;
   lastUpdated: string;
 }
 
@@ -24,8 +23,7 @@ export interface Specialization {
   id: string;
   title: string;
   readiness: Readiness;
-  frontierEligible: boolean;
-  frontierRequirement: string | null;
+  frontierPrerequisite: boolean;
   accelerator: string | null;
   microhack: string | null;
 }
@@ -81,23 +79,6 @@ function expectBoolean(
   }
 
   return value;
-}
-
-function expectOptionalString(
-  record: UnknownRecord,
-  key: string,
-  path: string,
-): string | null {
-  const value = record[key];
-  if (value === null || value === undefined) {
-    return null;
-  }
-
-  if (typeof value !== 'string' || value.trim() === '') {
-    throw new Error(`${path}.${key} must be a non-empty string or null.`);
-  }
-
-  return value.trim();
 }
 
 function expectUrl(
@@ -162,7 +143,6 @@ function parseSite(value: unknown): SiteMeta {
     footerNote: expectString(record, 'footerNote', 'site'),
     repositoryUrl: expectUrl(record, 'repositoryUrl', 'site')!,
     catalogUrl: expectUrl(record, 'catalogUrl', 'site')!,
-    frontierSourceUrl: expectUrl(record, 'frontierSourceUrl', 'site')!,
     lastUpdated,
   };
 }
@@ -179,10 +159,9 @@ function parseSpecialization(value: unknown, path: string): Specialization {
   const readiness = readinessValue as Readiness;
   const accelerator = expectUrl(record, 'accelerator', path, true);
   const microhack = expectUrl(record, 'microhack', path, true);
-  const frontierEligible = expectBoolean(record, 'frontierEligible', path);
-  const frontierRequirement = expectOptionalString(
+  const frontierPrerequisite = expectBoolean(
     record,
-    'frontierRequirement',
+    'frontierPrerequisite',
     path,
   );
 
@@ -196,18 +175,11 @@ function parseSpecialization(value: unknown, path: string): Specialization {
     throw new Error(`${path} must publish an accelerator before work starts.`);
   }
 
-  if (frontierEligible && !frontierRequirement) {
-    throw new Error(
-      `${path}.frontierRequirement is required for a Frontier-eligible entry.`,
-    );
-  }
-
   return {
     id: expectSlug(record, 'id', path),
     title: expectString(record, 'title', path),
     readiness,
-    frontierEligible,
-    frontierRequirement,
+    frontierPrerequisite,
     accelerator,
     microhack,
   };

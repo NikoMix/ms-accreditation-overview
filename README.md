@@ -1,9 +1,9 @@
-# Microsoft Specialization Readiness
+# Microsoft Partner Specialization Acceleration
 
 A partner-ready, single-page dashboard for Microsoft specialization
 accelerators and Microhacks. The catalog is grouped by Microsoft solution area,
-uses clear readiness indicators, and highlights specializations that contribute
-to the Frontier Partner specialization path.
+uses clear readiness indicators, and tracks Frontier specialization
+prerequisites.
 
 All catalog content is maintained in
 [`data/specializations.yaml`](data/specializations.yaml). The application reads
@@ -36,8 +36,7 @@ solutionAreas:
       - id: "ai-apps"
         title: "AI Apps on Microsoft Azure"
         readiness: "ready"
-        frontierEligible: true
-        frontierRequirement: "Why this path counts toward Frontier."
+        frontierPrerequisite: true
         accelerator: "https://github.com/owner/accelerator"
         microhack: "https://github.com/owner/microhack"
 ```
@@ -45,6 +44,9 @@ solutionAreas:
 Solution areas and their specializations mirror the tabs on the
 [Microsoft specialization page](https://partner.microsoft.com/en-us/partnership/specialization),
 including every solution path behind each tab.
+
+The dedicated Frontier section tracks the cross-domain Frontier Partner
+specialization separately.
 
 ### Shared specializations
 
@@ -67,18 +69,16 @@ Readiness describes content completeness, not repository visibility. The
 current Microhack repositories require authorized GitHub access, which is also
 called out in the catalog UI.
 
-### Frontier badge
+### Frontier specialization prerequisites
 
-Set `frontierEligible: true` only when the specialization counts toward a
-published Frontier Partner specialization prerequisite. Add
-`frontierRequirement` to explain the path. The current catalog marks
-**Microsoft 365 Copilot**, **Data Security**, and **Identity and Access
-Management**, plus **AI Apps on Microsoft Azure** and **AI Platform on
-Microsoft Azure** as the two alternatives for the fourth prerequisite.
+Set `frontierPrerequisite: true` when a specialization is a prerequisite for
+the Frontier Partner specialization. The catalog filter includes **Microsoft
+365 Copilot**, **Data Security**, and **Identity and Access Management**, plus
+**AI Apps on Microsoft Azure** and **AI Platform on Microsoft Azure** as the
+two alternatives for the fourth prerequisite.
 
-Frontier program criteria are evolving. Confirm changes against
-[Microsoft guidance](https://partner.microsoft.com/en-us/blog/article/engineering-frontier-partner-practice)
-before updating the badge.
+Frontier program criteria are evolving. Confirm prerequisite changes in
+Microsoft Partner Center before updating the catalog.
 
 ### Supported solution-area icons
 
