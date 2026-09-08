@@ -96,19 +96,7 @@ function SpecializationRow({
         <ReadinessIndicator readiness={specialization.readiness} />
       </td>
       <td className="specialization-cell" data-label="Specialization">
-        <div className="specialization-title">
-          <span>{specialization.title}</span>
-          {specialization.frontierEligible ? (
-            <span
-              className="frontier-badge"
-              title={specialization.frontierRequirement ?? undefined}
-              aria-label={`Frontier path: ${specialization.frontierRequirement}`}
-            >
-              <Icon name="frontier" />
-              Frontier eligible
-            </span>
-          ) : null}
-        </div>
+        <div className="specialization-title">{specialization.title}</div>
       </td>
       <td data-label="Accelerator">
         <ResourceLink
@@ -208,18 +196,17 @@ function AreaSection({
 
 export function CatalogView({
   solutionAreas,
-  frontierSourceUrl,
   microhackAccessNote,
 }: {
   solutionAreas: SolutionArea[];
-  frontierSourceUrl: string;
   microhackAccessNote: string;
 }) {
   const [query, setQuery] = useState('');
   const [readiness, setReadiness] = useState<ReadinessFilter>('all');
-  const [frontierOnly, setFrontierOnly] = useState(false);
+  const [frontierPrerequisiteOnly, setFrontierPrerequisiteOnly] =
+    useState(false);
   const filtersActive =
-    query.trim() !== '' || readiness !== 'all' || frontierOnly;
+    query.trim() !== '' || readiness !== 'all' || frontierPrerequisiteOnly;
 
   const filteredAreas = useMemo(() => {
     const normalizedQuery = query.trim().toLocaleLowerCase();
@@ -233,12 +220,12 @@ export function CatalogView({
         const matchesReadiness =
           readiness === 'all' || specialization.readiness === readiness;
         const matchesFrontier =
-          !frontierOnly || specialization.frontierEligible;
+          !frontierPrerequisiteOnly || specialization.frontierPrerequisite;
 
         return matchesQuery && matchesReadiness && matchesFrontier;
       }),
     }));
-  }, [frontierOnly, query, readiness, solutionAreas]);
+  }, [frontierPrerequisiteOnly, query, readiness, solutionAreas]);
 
   const resultCount = countSpecializations(filteredAreas);
   const totalCount = countSpecializations(solutionAreas);
@@ -246,7 +233,7 @@ export function CatalogView({
   function resetFilters() {
     setQuery('');
     setReadiness('all');
-    setFrontierOnly(false);
+    setFrontierPrerequisiteOnly(false);
   }
 
   return (
@@ -292,13 +279,15 @@ export function CatalogView({
             <label className="frontier-toggle">
               <input
                 type="checkbox"
-                checked={frontierOnly}
-                onChange={(event) => setFrontierOnly(event.target.checked)}
+                checked={frontierPrerequisiteOnly}
+                onChange={(event) =>
+                  setFrontierPrerequisiteOnly(event.target.checked)
+                }
               />
               <span className="toggle-track" aria-hidden="true">
                 <span />
               </span>
-              <span>Frontier eligible only</span>
+              <span>Frontier Specialization Pre-Requisite only</span>
             </label>
           </div>
 
@@ -329,26 +318,6 @@ export function CatalogView({
             />
           ))}
         </div>
-
-        <aside className="frontier-note">
-          <span className="frontier-note-icon" aria-hidden="true">
-            <Icon name="frontier" />
-          </span>
-          <div>
-            <h2>About the Frontier eligibility badge</h2>
-            <p>
-              It marks the specializations that are prerequisites for the
-              Frontier Partner specialization: Microsoft 365 Copilot, Data
-              Security, and Identity and Access Management, plus either AI Apps
-              on Microsoft Azure or AI Platform on Microsoft Azure. Current
-              requirements remain subject to Microsoft program guidance.
-            </p>
-          </div>
-          <a href={frontierSourceUrl} target="_blank" rel="noreferrer">
-            Read Microsoft guidance
-            <Icon name="external" />
-          </a>
-        </aside>
       </div>
     </div>
   );

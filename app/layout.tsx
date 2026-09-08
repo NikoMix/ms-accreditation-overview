@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Microsoft Specialization Readiness',
+  title: 'Microsoft Partner Specialization Acceleration',
   description:
     'A partner-ready view of Microsoft specialization accelerators and Microhacks, maintained from YAML.',
 };

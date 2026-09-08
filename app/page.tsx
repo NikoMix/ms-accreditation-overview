@@ -14,9 +14,6 @@ export default function Home() {
   const readyCount = specializations.filter(
     (specialization) => specialization.readiness === 'ready',
   ).length;
-  const frontierCount = specializations.filter(
-    (specialization) => specialization.frontierEligible,
-  ).length;
   const formattedDate = new Intl.DateTimeFormat('en', {
     dateStyle: 'medium',
     timeZone: 'UTC',
@@ -42,21 +39,11 @@ export default function Home() {
               <span className="updated-note">Updated {formattedDate}</span>
             </div>
 
-            <div className="hero-summary" aria-label="Catalog summary">
-              <div className="summary-card summary-card-primary">
-                <span>Catalog coverage</span>
-                <strong>{specializations.length}</strong>
-                <small>specialization paths</small>
-              </div>
+            <div className="hero-summary" aria-label="Readiness summary">
               <div className="summary-card">
                 <span>Ready now</span>
                 <strong>{readyCount}</strong>
                 <small>complete resource pairs</small>
-              </div>
-              <div className="summary-card">
-                <span>Frontier eligible</span>
-                <strong>{frontierCount}</strong>
-                <small>Frontier prerequisites</small>
               </div>
             </div>
           </div>
@@ -91,7 +78,6 @@ export default function Home() {
 
         <CatalogView
           solutionAreas={solutionAreas}
-          frontierSourceUrl={site.frontierSourceUrl}
           microhackAccessNote={site.microhackAccessNote}
         />
       </main>

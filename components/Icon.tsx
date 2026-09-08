@@ -4,7 +4,6 @@ export type IconName =
   | AreaIcon
   | 'arrow'
   | 'external'
-  | 'frontier'
   | 'github'
   | 'moon'
   | 'search'
@@ -116,20 +115,6 @@ export function Icon({
             stroke="currentColor"
             strokeWidth="1.7"
             strokeLinecap="round"
-          />
-        </svg>
-      );
-    case 'frontier':
-      return (
-        <svg {...common}>
-          <path
-            d="m12 2.9 2.15 5.05L19.2 10.1l-5.05 2.15L12 17.3l-2.15-5.05L4.8 10.1l5.05-2.15L12 2.9Z"
-            fill="currentColor"
-          />
-          <path
-            d="m18.3 15.1.8 1.8 1.8.8-1.8.78-.8 1.82-.78-1.82-1.82-.78 1.82-.8.78-1.8Z"
-            fill="currentColor"
-            opacity=".7"
           />
         </svg>
       );
