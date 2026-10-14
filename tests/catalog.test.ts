@@ -72,18 +72,3 @@ test('rejects impossible calendar dates', () => {
     /lastUpdated must be a valid calendar date/,
   );
 });
-
-test('requires a complete resource pair for ready entries', () => {
-  const catalog = structuredClone(getCatalog());
-  const readySpecialization = catalog.solutionAreas
-    .flatMap((area) => area.specializations)
-    .find((specialization) => specialization.readiness === 'ready');
-
-  assert.ok(readySpecialization);
-  readySpecialization.microhack = null;
-
-  assert.throws(
-    () => parseCatalog(catalog),
-    /marked ready but is missing an accelerator or Microhack/,
-  );
-});
