@@ -48,18 +48,6 @@ test('requires identical values for a shared specialization', () => {
   );
 });
 
-test('uses the Microsoft Hackathons resource pairs', () => {
-  const resources = Object.fromEntries(
-    uniqueSpecializations(getCatalog().solutionAreas).map((specialization) => [
-      specialization.id,
-      {
-        readiness: specialization.readiness,
-        accelerator: specialization.accelerator,
-        microhack: specialization.microhack,
-      },
-    ]),
-  );
-
 test('marks the Frontier Partner prerequisite specializations', () => {
   const prerequisites = uniqueSpecializations(getCatalog().solutionAreas)
     .filter((specialization) => specialization.frontierPrerequisite)
