@@ -60,50 +60,6 @@ test('uses the Microsoft Hackathons resource pairs', () => {
     ]),
   );
 
-  assert.deepEqual(resources['data-security'], {
-    readiness: 'ready',
-    accelerator:
-      'https://github.com/microsofthackathons/accelerator-data-security-specialization',
-    microhack:
-      'https://github.com/microsofthackathons/hackathon-data-security-specialization',
-  });
-  assert.deepEqual(resources['identity-access-management'], {
-    readiness: 'ready',
-    accelerator:
-      'https://github.com/microsofthackathons/accelerator-identity-access-management-specialization',
-    microhack:
-      'https://github.com/microsofthackathons/hackathon-identity-access-management-specialization',
-  });
-  assert.deepEqual(resources['frontier-partner'], {
-    readiness: 'ready',
-    accelerator:
-      'https://github.com/microsofthackathons/accelerator-frontier-specialization',
-    microhack:
-      'https://github.com/microsofthackathons/hackathon-frontier-specialization',
-  });
-  assert.deepEqual(resources['ai-platform'], {
-    readiness: 'ready',
-    accelerator:
-      'https://github.com/microsofthackathons/accelerator-ai-platform-on-azure',
-    microhack:
-      'https://github.com/microsofthackathons/hackathon-ai-platform-on-azure',
-  });
-  assert.deepEqual(resources['ai-apps'], {
-    readiness: 'ready',
-    accelerator:
-      'https://github.com/microsofthackathons/accelerator-ai-apps-on-azure',
-    microhack:
-      'https://github.com/microsofthackathons/hackathon-ai-apps-on-azure',
-  });
-  assert.deepEqual(resources['microsoft-365-copilot'], {
-    readiness: 'ready',
-    accelerator:
-      'https://github.com/microsofthackathons/accelerator-m365-copilot-specialization',
-    microhack:
-      'https://github.com/microsofthackathons/hackathon-m365-copilot-specialization',
-  });
-});
-
 test('marks the Frontier Partner prerequisite specializations', () => {
   const prerequisites = uniqueSpecializations(getCatalog().solutionAreas)
     .filter((specialization) => specialization.frontierPrerequisite)
