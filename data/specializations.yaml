@@ -22,21 +22,21 @@ solutionAreas:
     specializations:
       - id: "infra-database-migration"
         title: "Infra and Database Migration to Microsoft Azure"
-        readiness: "ready"
+        readiness: "in-progress"
         frontierPrerequisite: false
         accelerator: "https://github.com/NikoMix/specialization-infra-and-database-migration"
         microhack: "https://github.com/NikoMix/microhack-infra-and-database-migration"
 
       - id: "networking-services"
         title: "Networking Services in Microsoft Azure"
-        readiness: "ready"
+        readiness: "in-progress"
         frontierPrerequisite: false
         accelerator: "https://github.com/NikoMix/specialization-networking-services"
         microhack: "https://github.com/NikoMix/microhack-networking-services"
 
       - id: "sap-on-azure"
         title: "SAP on Microsoft Azure"
-        readiness: "ready"
+        readiness: "in-progress"
         frontierPrerequisite: false
         accelerator: "https://github.com/NikoMix/specialization-sap-on-azure"
         microhack: "https://github.com/NikoMix/microhack-sap-on-azure"
@@ -50,14 +50,14 @@ solutionAreas:
 
       - id: "ai-apps"
         title: "AI Apps on Microsoft Azure"
-        readiness: "ready"
+        readiness: "in-progress"
         frontierPrerequisite: true
         accelerator: "https://github.com/microsofthackathons/accelerator-ai-apps-on-azure"
         microhack: "https://github.com/microsofthackathons/hackathon-ai-apps-on-azure"
 
       - id: "ai-platform"
         title: "AI Platform on Microsoft Azure"
-        readiness: "ready"
+        readiness: "in-progress"
         frontierPrerequisite: true
         accelerator: "https://github.com/microsofthackathons/accelerator-ai-platform-on-azure"
         microhack: "https://github.com/microsofthackathons/hackathon-ai-platform-on-azure"
@@ -174,21 +174,21 @@ solutionAreas:
 
       - id: "data-security"
         title: "Data Security"
-        readiness: "ready"
+        readiness: "in-progress"
         frontierPrerequisite: true
         accelerator: "https://github.com/microsofthackathons/accelerator-data-security-specialization"
         microhack: "https://github.com/microsofthackathons/hackathon-data-security-specialization"
 
       - id: "identity-access-management"
         title: "Identity and Access Management"
-        readiness: "ready"
+        readiness: "in-progress"
         frontierPrerequisite: true
         accelerator: "https://github.com/microsofthackathons/accelerator-identity-access-management-specialization"
         microhack: "https://github.com/microsofthackathons/hackathon-identity-access-management-specialization"
 
       - id: "microsoft-365-copilot"
         title: "Microsoft 365 Copilot"
-        readiness: "ready"
+        readiness: "in-progress"
         frontierPrerequisite: true
         accelerator: "https://github.com/microsofthackathons/accelerator-m365-copilot-specialization"
         microhack: "https://github.com/microsofthackathons/hackathon-m365-copilot-specialization"
@@ -277,7 +277,7 @@ solutionAreas:
 
       - id: "microsoft-365-copilot"
         title: "Microsoft 365 Copilot"
-        readiness: "ready"
+        readiness: "in-progress"
         frontierPrerequisite: true
         accelerator: "https://github.com/microsofthackathons/accelerator-m365-copilot-specialization"
         microhack: "https://github.com/microsofthackathons/hackathon-m365-copilot-specialization"
@@ -331,7 +331,7 @@ solutionAreas:
     specializations:
       - id: "frontier-partner"
         title: "Frontier Partner"
-        readiness: "ready"
+        readiness: "in-progress"
         frontierPrerequisite: false
         accelerator: "https://github.com/microsofthackathons/accelerator-frontier-specialization"
         microhack: "https://github.com/microsofthackathons/hackathon-frontier-specialization"
